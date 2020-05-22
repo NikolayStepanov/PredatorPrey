@@ -14,14 +14,25 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt5 COMPONENTS Core Quick REQUIRED)
 
 set (HEADERS
+    gamemodel.h
+    fish.h
+    shark.h
+    amphiprion.h
+    mediatorfishmotor.h
     )
 
 set (SOURCES
     main.cpp
+    gamemodel.cpp
+    fish.cpp
+    shark.cpp
+    amphiprion.cpp
+    mediatorfishmotor.cpp
     )
 
 set (RESOURCES
     qml.qrc
+    resource.qrc
     )
 
 add_executable(PredatorPrey ${HEADERS} ${SOURCES} ${RESOURCES})

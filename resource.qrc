@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/Female-Amphiprion.png</file>
+        <file>icons/Female-Shark.png</file>
+        <file>icons/Male-Amphiprion.png</file>
+        <file>icons/Male-Shark.png</file>
+        <file>icons/Rock.png</file>
+        <file>icons/Bubbles.png</file>
+    </qresource>
+</RCC>
