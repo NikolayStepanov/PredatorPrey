@@ -19,6 +19,12 @@ set (HEADERS
     shark.h
     amphiprion.h
     mediatorfishmotor.h
+    gameboard.h
+    common.h
+    cell.h
+    objectgame.h
+    rock.h
+    generator.h
     )
 
 set (SOURCES
@@ -28,6 +34,11 @@ set (SOURCES
     shark.cpp
     amphiprion.cpp
     mediatorfishmotor.cpp
+    gameboard.cpp
+    cell.cpp
+    objectgame.cpp
+    rock.cpp
+    generator.cpp
     )
 
 set (RESOURCES

@@ -4,12 +4,12 @@ import GameModel 1.0
 Item {
     id: root
 
-    property int nameImg: 0
+    property int typeImg: 0
 
     Image {
         id: img
         source: {
-            switch (nameImg) {
+            switch (typeImg) {
             case 1:
                 "../icons/Female-Amphiprion.png"
                 break;

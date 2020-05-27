@@ -2,20 +2,35 @@
 #define SHARK_H
 
 #include <fish.h>
+#include <QObject>
 
+#include <QTimer>
+#include <QTime>
 
-const size_t g_BREEDINGTIME = 3000;
-const size_t g_TIMETODEATH = 5000;
-
-
-class Shark: public Fish
+class Shark:  public QObject,public Fish
 {
+    Q_OBJECT
 public:
-    Shark(bool gender, size_t indexCell);
+    Shark(bool gender);
+    ~Shark();
+
+
+private slots:
+    void slotGiveOffspring();
+    void slotDie();
+
+signals:
+    void die(size_t);
+
+public:
+    ObjectType getType() override;
 
     bool reproduction() override;
     bool eat() override;
-    void move(size_t index) override;
+    void move() override;
+private:
+    QTimer * m_timerGiveOffspring;
+    QTimer * m_timerDeath;
 };
 
 #endif // SHARK_H
