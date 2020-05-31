@@ -1,7 +1,7 @@
 #include "shark.h"
 
-const size_t g_BREEDINGTIME = 5000;
-const size_t g_TIMETODEATH = 6000;
+const size_t g_BREEDINGTIME = 4000;
+const size_t g_TIMETODEATH = 8000;
 
 #include <mediatorfishmotor.h>
 
@@ -95,9 +95,12 @@ bool Shark::eat()
         ObjectInf object = listObjectsEatForId.at(indexEat);
         mediator->deleteObject(object);
         mediator->moveObject(id, object.m_index);
-        connect(m_timerDeath, SIGNAL(timeout()),SLOT(slotDie()));
-        connect(this, SIGNAL(die(size_t)),mediator,SLOT(deleteObjectForId(size_t)));
-        m_timerDeath->start();
+        if(!m_timerDeath->isActive())
+        {
+            connect(m_timerDeath, SIGNAL(timeout()),SLOT(slotDie()));
+            connect(this, SIGNAL(die(size_t)),mediator,SLOT(deleteObjectForId(size_t)));
+            m_timerDeath->start();
+        }
         return true;
     }
     return false;

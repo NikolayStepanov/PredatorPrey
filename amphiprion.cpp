@@ -10,6 +10,11 @@ Amphiprion::Amphiprion(bool gender): Fish(gender,g_BREEDING_TIME,g_TIME_TO_DEATH
     m_timerGiveOffspring->setInterval(g_BREEDING_TIME);
 }
 
+Amphiprion::~Amphiprion()
+{
+    delete m_timerGiveOffspring;
+}
+
 void Amphiprion::slotGiveOffspring()
 {
     m_timerGiveOffspring->stop();
@@ -56,7 +61,7 @@ bool Amphiprion::reproduction()
 
 bool Amphiprion::eat()
 {
-
+    return false;
 }
 
 void Amphiprion::move()

@@ -2,6 +2,8 @@
 #include <QModelIndex>
 #include <QPoint>
 
+#include <generator.h>
+
 MediatorFishMotor * MediatorFishMotor::p_instance = nullptr;
 
 MediatorFishMotor *MediatorFishMotor::getInstance()
@@ -13,11 +15,13 @@ MediatorFishMotor *MediatorFishMotor::getInstance()
 
 MediatorFishMotor::~MediatorFishMotor()
 {
-    delete [] p_gameBoard;
-}
+    delete p_gameBoard;
+    delete p_generator;
 
-QList<Cell> MediatorFishMotor::getNeighboringCells()
-{
+    m_objectsGameList.clear();
+    m_fishList.clear();
+    m_sharkList.clear();
+    m_amphiprionList.clear();
 
 }
 
@@ -91,6 +95,7 @@ void MediatorFishMotor::deleteObject(ObjectInf objectInf)
     default:
         break;
     }
+    m_fishList.removeAll(nullptr);
     p_gameBoard->deleteObject(objectInf.m_id);
 }
 
@@ -135,6 +140,10 @@ ObjectGame *MediatorFishMotor::createObjectGame(ObjectType type)
         m_fishList.push_back(amphiprion);
         break;
     }
+    case ObjectType::EMPTY:
+    {
+        break;
+    }
     default:
         assert( false);
     }
@@ -171,33 +180,69 @@ void MediatorFishMotor::nextStep()
     {
 
         fish->reproduction();
-
     }
+
     for(auto shark:m_sharkList)
     {
         if(!shark->eat())
         {
             shark->move();
         };
-        // shark->eat();
     }
     for(auto amphiprion :m_amphiprionList)
     {
         amphiprion->move();
     }
-
-    /*for(auto fish:m_fishList)
-    {
-        if(fish!=nullptr)
-        {
-            fish->move();
-        }
-    }*/
 }
 
 QPoint MediatorFishMotor::getPointForIndex(size_t index)
 {
     return p_gameBoard->cellCoordinatesFromIndex(index);
+}
+
+void MediatorFishMotor::changeTypeObject(size_t id, int type, size_t index)
+{
+    switch (type)
+    {
+    case ObjectType::ROCK:
+    {
+        deleteObjectForId(id);
+        p_gameBoard->setCellNewObject(index,createObjectGame(ObjectType::SHARK_MALE));
+        break;
+    }
+    case ObjectType::SHARK_MALE:
+    {
+        deleteObjectForId(id);
+        p_gameBoard->setCellNewObject(index,createObjectGame(ObjectType::SHARK_FEMALE));
+        break;
+    }
+    case ObjectType::SHARK_FEMALE:
+    {
+        deleteObjectForId(id);
+        p_gameBoard->setCellNewObject(index,createObjectGame(ObjectType::AMPHIPRION_MALE));
+        break;
+    }
+    case ObjectType::AMPHIPRION_MALE:
+    {
+        deleteObjectForId(id);
+        p_gameBoard->setCellNewObject(index,createObjectGame(ObjectType::AMPHIPRION_FEMALE));
+        break;
+    }
+    case ObjectType::AMPHIPRION_FEMALE:
+    {
+        deleteObjectForId(id);
+        p_gameBoard->setCellNewObject(index,createObjectGame(ObjectType::EMPTY));
+        break;
+    }
+    case ObjectType::EMPTY:
+    {
+        deleteObjectForId(id);
+        p_gameBoard->setCellNewObject(index,createObjectGame(ObjectType::ROCK));
+        break;
+    }
+    default:
+        assert( false);
+    }
 }
 
 GameBoard *MediatorFishMotor::getGameBoard()

@@ -12,6 +12,7 @@ class Amphiprion:public QObject, public Fish
     Q_OBJECT
 public:
     Amphiprion(bool gender);
+    ~Amphiprion();
 
 private slots:
     void slotGiveOffspring();

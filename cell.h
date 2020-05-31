@@ -17,7 +17,6 @@ signals:
     void updatedCell(size_t index);
 public:
     bool createObject(ObjectType type);
-    //bool setObject(ObjectGame objectGame);
     bool setObject(ObjectGame * objectGame);
     void deleteObject();
     ObjectInf getObjectInf();

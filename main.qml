@@ -15,6 +15,9 @@ ApplicationWindow {
     TableView {
         id: tableView
         anchors.fill: parent
+        anchors.centerIn: parent
+        anchors.leftMargin: 10
+        anchors.topMargin: 10
 
         rowSpacing: 1
         columnSpacing: 1
@@ -41,7 +44,7 @@ ApplicationWindow {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-
+                    gameModel.changeTypeCell(id,type,index)
                 }
             }
         }

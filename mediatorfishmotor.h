@@ -1,18 +1,16 @@
 #ifndef MEDIATORFISHMOTOR_H
 #define MEDIATORFISHMOTOR_H
 
+#include <QList>
 
-#include <bootstrapper.h>
 #include <fish.h>
 #include <shark.h>
 #include <amphiprion.h>
 #include <rock.h>
-
 #include <generator.h>
-
-#include <QList>
-
 #include <gameboard.h>
+
+class Generator;
 
 class MediatorFishMotor: public QObject
 {
@@ -22,7 +20,6 @@ public:
     ~MediatorFishMotor();
 
     //Board
-    QList<Cell> getNeighboringCells();
     QList<ObjectInf> getNeighboringObjectInf(size_t id);
     QList<size_t> getEmptyNeighboringCell(size_t id);
     ObjectInf getObjectInfForId(size_t objectId);
@@ -39,6 +36,7 @@ public:
     ObjectInf getObjectInf(const QModelIndex index) const;
     void nextStep();
     QPoint getPointForIndex(size_t index);
+    void changeTypeObject(size_t id, int type, size_t index);
 
     //generator
     GameBoard *getGameBoard();
@@ -65,8 +63,6 @@ private:
     static constexpr int height = 8;
 
     static MediatorFishMotor * p_instance;
-
-    Bootstrapper * p_bootstrap;
 
     GameBoard *p_gameBoard;
     Generator *p_generator;

@@ -46,21 +46,6 @@ bool Cell::createObject(ObjectType type)
     return true;
 }
 
-/*bool Cell::setObject(ObjectGame objectGame)
-{
-    if(!p_object)
-    {
-        delete p_object;
-        *p_object = objectGame;
-    }
-    else
-    {
-        *p_object = objectGame;
-    }
-    emit updatedCell(m_index);
-    return true;
-}*/
-
 bool Cell::setObject(ObjectGame *objectGame)
 {
     if(!p_object)

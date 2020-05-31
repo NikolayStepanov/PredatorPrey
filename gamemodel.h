@@ -41,6 +41,7 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 
     Q_INVOKABLE void nextStep();
+    Q_INVOKABLE void changeTypeCell(QVariant id, QVariant type, QVariant index);
 
     QVector<int> getAllRolesIndex();
 

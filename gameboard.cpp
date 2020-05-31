@@ -12,8 +12,6 @@ GameBoard::GameBoard(QObject *parent, size_t width, size_t height): QObject(pare
     m_width = width;
     m_size = width * height;
 
-    m_cellsContainer.reserve(m_size*sizeof(Cell));
-
     createEmptyBoard();
 }
 
@@ -228,6 +226,10 @@ size_t GameBoard::cellIndex(const QPoint &coordinates) const
 
 void GameBoard::deleteBoard()
 {
+    for(auto &cell:m_cellsContainer)
+    {
+        delete cell;
+    }
     m_cellsContainer.clear();
 }
 

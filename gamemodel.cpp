@@ -77,6 +77,11 @@ void GameModel::nextStep()
     mediator->nextStep();
 }
 
+void GameModel::changeTypeCell(QVariant id, QVariant type, QVariant index)
+{
+    mediator->changeTypeObject(id.toInt(nullptr),type.toInt(nullptr),index.toULongLong(nullptr));
+}
+
 QVector<int> GameModel::getAllRolesIndex()
 {
 
@@ -86,8 +91,8 @@ void GameModel::slotCellUpdate(size_t indexCell)
 {
     QPoint pointUpdate = mediator->getPointForIndex(indexCell);
     QModelIndex indexUpdate = index(pointUpdate.y(),pointUpdate.x());
-    emit dataChanged(index(0,0),index(7,15));
-    //emit dataChanged(indexUpdate,indexUpdate);
+    //emit dataChanged(index(0,0),index(7,15));
+    emit dataChanged(indexUpdate,indexUpdate);
 }
 
 

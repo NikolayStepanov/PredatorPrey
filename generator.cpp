@@ -4,7 +4,7 @@
 #include <mediatorfishmotor.h>
 
 const size_t g_SHARK_COUNT = 10;
-const size_t g_AMPHIPRION_COUNT = 35;
+const size_t g_AMPHIPRION_COUNT = 28;
 const size_t g_LET_COUNT = 10;
 
 const size_t g_FISH_COUNT = g_SHARK_COUNT + g_AMPHIPRION_COUNT;
@@ -16,6 +16,11 @@ Generator *Generator::getInstance()
     if(!p_instance)
         p_instance = new Generator();
     return p_instance;
+}
+
+Generator::~Generator()
+{
+    delete p_board;
 }
 
 bool Generator::generationBoard()
